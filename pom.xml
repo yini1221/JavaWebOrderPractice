@@ -5,20 +5,27 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   
-  <dependencies>
+ <dependencies>
 
   <!-- JSTL -->
-  <dependency>
+	<dependency>
     <groupId>jakarta.servlet.jsp.jstl</groupId>
     <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
     <version>3.0.0</version>
-  </dependency>
+	</dependency>
 		
-  <dependency>
+	<dependency>
     <groupId>org.glassfish.web</groupId>
     <artifactId>jakarta.servlet.jsp.jstl</artifactId>
     <version>3.0.0</version>
-  </dependency>
+	</dependency>
+ 	
+	<!-- Lombok -->
+	<dependency>
+	    <groupId>org.projectlombok</groupId>
+	    <artifactId>lombok</artifactId>
+	    <version>1.18.38</version>
+	</dependency>
  	
 </dependencies>
   
