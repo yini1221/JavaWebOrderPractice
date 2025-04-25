@@ -13,7 +13,7 @@ import model.dto.OrderDTO;
 import service.OrderService;
 
 @WebServlet("/order/delete")
-public class OrderDeleteDervlet extends HttpServlet{
+public class OrderDeleteServlet extends HttpServlet{
 
 	OrderService orderService = new OrderService();
 	

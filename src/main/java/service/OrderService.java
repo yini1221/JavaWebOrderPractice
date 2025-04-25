@@ -4,18 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.OrderDAO;
+import dao.ProductDAO;
 import model.dto.OrderDTO;
 import model.entity.Order;
 
 public class OrderService {
 
 	private OrderDAO orderDAO = new OrderDAO();
+	private ProductDAO productDAO = new ProductDAO();
 	
 	// 根據訂單項目(item)新增一筆訂單並回傳訂單顯示資訊(OrderDTO)
 	public OrderDTO addOrder(String item) {
 		Order order = new Order();
 		order.setItem(item);
-		order.setPrice(100);
+//		order.setPrice(100);
+		order.setPrice(productDAO.getProduct(item).getPrice());
 		orderDAO.save(order);
 		
 		OrderDTO orderDTO = new OrderDTO();
@@ -47,10 +50,17 @@ public class OrderService {
 	public OrderDTO updateOrder(int index, String newItem) {
 		Order order = orderDAO.getOrder(index);
 		order.setItem(newItem);
-		order.setPrice(100);
+		order.setPrice(productDAO.getProduct(newItem).getPrice());
 		orderDAO.update(index, order);
 		OrderDTO orderDTO = new OrderDTO();
-		orderDTO.setMessage("index=" + index + "資料修改成功");
+		orderDTO.setMessage("index=" + index + ". 資料修改成功");
 		return orderDTO;
 	}
+	
+	// 取得總價格
+	public int getTotalPrice() {
+		return orderDAO.findAll().stream().mapToInt(o -> o.getPrice()).sum();
+	}
+	
+	
 }

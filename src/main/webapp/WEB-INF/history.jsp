@@ -36,7 +36,12 @@
 							</tr>
 						</c:forEach>
 					</tbody>
-					<tfoot></tfoot>
+					<tfoot>
+						<tr style="background-color: #DDDDDD">
+							<td colspan="2" style="text-align: right;">總金額:<fmt:formatNumber value="${ totalPrice }" type="currency"></fmt:formatNumber></td>
+							<td colspan="2"></td>
+						</tr>
+					</tfoot>
 				</table>
 				<p />
 				<a href="/JavaWebOrder/index.jsp" class="button-success pure-button">返回首頁</a>

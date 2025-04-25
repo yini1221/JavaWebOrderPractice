@@ -10,18 +10,29 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.dto.OrderDTO;
 import service.OrderService;
+import service.ProductService;
 
-@WebServlet("/order/update/")
+@WebServlet("/order/update")
 public class OrderUpdateServlet extends HttpServlet{
 
-	OrderService orderService = new OrderService();
+	private OrderService orderService = new OrderService();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		String index = req.getParameter("index");
-		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/update");
+		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/update.jsp");
 		req.setAttribute("index", index);
+		rd.forward(req, resp);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		String index = req.getParameter("index");
+		String newItem = req.getParameter("item");
+		OrderDTO orderDTO = orderService.updateOrder(Integer.parseInt(index), newItem);
+		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/result.jsp");
+		req.setAttribute("orderDTO", orderDTO);
 		rd.forward(req, resp);
 	}
 

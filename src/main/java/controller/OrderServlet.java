@@ -11,17 +11,21 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.dto.OrderDTO;
 import service.OrderService;
+import service.ProductService;
 
 @WebServlet("/order")
 public class OrderServlet extends HttpServlet{
 	
 	OrderService orderService = new OrderService();
+	private ProductService productService = new ProductService();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<OrderDTO> orderDTOs = orderService.getHistoryOrder();
+		int totalPrice = orderService.getTotalPrice();
 		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/history.jsp");
 		req.setAttribute("orderDTOs", orderDTOs);
+		req.setAttribute("totalPrice", totalPrice);
 		rd.forward(req, resp);
 	}
 
