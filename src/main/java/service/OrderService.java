@@ -44,7 +44,13 @@ public class OrderService {
 	}
 
 	// 修改單筆
-	public OrderDTO updateOrder(int index, Order newOrder) {
-		orderDAO.update(index, newOrder);
+	public OrderDTO updateOrder(int index, String newItem) {
+		Order order = orderDAO.getOrder(index);
+		order.setItem(newItem);
+		order.setPrice(100);
+		orderDAO.update(index, order);
+		OrderDTO orderDTO = new OrderDTO();
+		orderDTO.setMessage("index=" + index + "資料修改成功");
+		return orderDTO;
 	}
 }
